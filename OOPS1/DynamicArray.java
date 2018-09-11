@@ -1,0 +1,54 @@
+package OOPS1;
+
+public class DynamicArray {
+	private int data[];
+	private int nextIndex;
+
+	public  DynamicArray() {
+		data = new int [5];
+		nextIndex = 0;
+	}
+	public int size() {
+		
+		return nextIndex;
+	}
+	public void add(int element) {
+		if(nextIndex+1 > data.length)
+			restructure();
+		data[nextIndex] = element;
+		nextIndex++;
+	}
+	public void set(int index,int element) {
+		if(index>nextIndex)
+			return;
+		else if(index<nextIndex)
+			data[index] = element;
+		else
+			add(element);
+	}
+	public int get(int index) {
+		if(index<nextIndex)
+			return data[index];
+		else
+			return -1;
+	}
+	public boolean isEmpty() {
+		return (size() == 0);
+	}
+	public int removeLast() {
+		if (size()==0)
+			return -1;
+		int value = data[nextIndex-1];
+		data[nextIndex-1]=0;
+		nextIndex--;
+		return value;
+	}
+	private void restructure() {
+		int temp[] = data;
+		data = new int[data.length*2];
+		for(int i=0;i<temp.length;i++) {
+			data[i] = temp[i];
+		}
+	}
+
+}
